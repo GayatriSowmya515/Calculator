@@ -1,6 +1,6 @@
 # Calculator
 
-* This is a simple calculator app with user-friendly UI which will perfrom basic arithmetic operations.
+* This is a simple calculator app with user-friendly UI which will perform basic arithmetic operations.
 * Developed using Java in Android Studio.
 
 
