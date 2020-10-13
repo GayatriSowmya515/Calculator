@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "Bello";
 
       Button btn[] = new Button[10];
       Button btnC,btnCh,btnP,btnD,btnX,btnS,btnA,btnE,btnDc;
@@ -55,14 +61,23 @@ public class MainActivity extends AppCompatActivity {
             btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(c=='m'){
+                        s=0.0;
+                        st="";
+                        c='n';
+                        d=0;
+                    }
                         st = st + finalI;
+
                     if(st.length()>=10){
                         tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
                     }
+                    else{
+                        tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
+                    }
                         tv2.setText(st);
                         f=0;
-
-
                 }
             });
         }
@@ -76,26 +91,31 @@ public class MainActivity extends AppCompatActivity {
                  d=0;
                 tv1.setText(st);
                 tv2.setText(st);
+                tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 c='n';
             }
         });
         btnCh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(st!=""){
+                if(!st.equals("")){
                 num = Double.parseDouble(st);
                 num=num*(-1);
                 st=num+"";
                 tv2.setText(st);
-                }
+                    if(Math.ceil(num)==num){
 
+                        tv2.setText(Math.round(num) + "");
+                    }
+                    else{
+                        tv2.setText(num+"");
+                    }
+                }
             }
         });
         btnP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
                     if(f==0) {
                         num = Double.parseDouble(st);
@@ -121,9 +141,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                     f=1;
                 st="";d=0;
-                tv1.setText(s + "%");
-                if(s%1000000000>0){
+
+                if(Math.ceil(s)==s){
+
+                    tv1.setText(Math.round(s) + "%");
+                }
+                else{
+                    tv1.setText(s+"%");
+                }
+                if(String.valueOf(s).length()>10){
                     tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                }
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 }
                 tv2.setText(st);
                 c='%';
@@ -153,9 +183,18 @@ public class MainActivity extends AppCompatActivity {
                 st="";
                 c='+';
                 f=1;d=0;
-                tv1.setText(s + "+");
-                if(s%1000000000>0){
-                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                if(Math.ceil(s)!=s){
+                    tv1.setText(s+"+");
+                }
+                else{
+                    tv1.setText(Math.round(s) + "+");
+
+                }
+                if(String.valueOf(s).length()>10){
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
+                }
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 }
                 tv2.setText(st);
             }
@@ -166,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(f==0) {
                     num = Double.parseDouble(st);
+                    Log.v(TAG, "   num : "+ num+"   st : "+ st+"   c : "+c+"   s : "+s);
                     switch (c) {
                         case '+':
                             s = s + num;
@@ -189,9 +229,18 @@ public class MainActivity extends AppCompatActivity {
                 f=1;
                 st="";
                 c='-';d=0;
-                tv1.setText(s + "-");
-                if(s%1000000000>0){
-                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                if(Math.ceil(s)!=s){
+                    tv1.setText(s+"-");
+                }
+                else{
+                    tv1.setText(Math.round(s) + "-");
+
+                }
+                if(String.valueOf(s).length()>10){
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
+                }
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 }
                 tv2.setText(st);
             }
@@ -226,9 +275,18 @@ public class MainActivity extends AppCompatActivity {
                 f=1;
                 st="";
                 c='*';d=0;
-                tv1.setText(s + "*");
-                if(s%1000000000>0){
-                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                if(Math.ceil(s)!=s){
+                    tv1.setText(s+"*");
+                }
+                else{
+                    tv1.setText(Math.round(s) + "*");
+
+                }
+                if(String.valueOf(s).length()>10){
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
+                }
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 }
                 tv2.setText(st);
             }
@@ -256,9 +314,19 @@ public class MainActivity extends AppCompatActivity {
                 f=1;
                 st="";
                 c='/';d=0;
-                tv1.setText(s + "/");
-                if(s%1000000000>0){
+                if(Math.ceil(s)!=s){
+                    tv1.setText(s+"/");
+                }
+                else{
+                    tv1.setText(Math.round(s) + "/");
+
+                }
+               // Toast.makeText(MainActivity.this, "Added "+s, Toast.LENGTH_SHORT).show();
+                if(String.valueOf(s).length()>10){
                     tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                }
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
                 }
                 tv2.setText(st);
             }
@@ -281,13 +349,27 @@ public class MainActivity extends AppCompatActivity {
                     default: s=num;
                 }
                 st=String.valueOf(s);
-                c='n';
+                c='m';
                 f=0;d=0;
                 tv1.setText("");
-                if(s%1000000000>0){
+
+                Log.v(TAG,"hELLOOO "+s+" TYPE: ");
+
+                if(String.valueOf(s).length()>10){
                     tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,35);
+                    Log.v(TAG,"hELLOOO22223333333333333 "+s);
                 }
-                tv2.setText(String.valueOf(s));
+                else{
+                    tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP,55);
+                    Log.v(TAG,"hELLOOO2222 "+s);
+                }
+
+                if(Math.ceil(s)==s){
+                    tv2.setText(Math.round(s)+"");
+                }
+                else{
+                    tv2.setText(s+"");
+                }
 
             }
         });
@@ -298,6 +380,7 @@ public class MainActivity extends AppCompatActivity {
                     d++;
                     st = st + ".";
                 }
+                tv2.setText(st);
 
             }
         });
